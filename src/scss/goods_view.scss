@@ -1,0 +1,270 @@
+body::after {
+    display: block;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.243) ;
+    position: absolute;
+    width: 100%;
+    height: 130%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: none;
+}
+#goods-card-view-wrap {
+        width: 70%;
+        background-color: white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 20px;
+        z-index: 3;
+        box-shadow: 0px 0px 12px 2px #00000017;
+        display: none;
+
+        #goods-card-view {
+            display: flex;
+            border-radius: 20px;
+            overflow: hidden;
+
+            #goods-card-view-left {    
+                position: relative; 
+
+                & img {
+                    width: 100%;
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    overflow: hidden;
+                    position: relative;
+                }
+
+                #view-left-button-wrap {
+                    position: absolute;
+                    top: 93%;
+
+                    #photo-number {
+                        position: absolute;
+                        left: 20px;
+                        padding: 5px 10px;
+                        background-color: rgba(255, 255, 255, 0.393);
+                        border-radius: 20px;
+                    }
+
+                    #video-btn {
+                        display: flex;
+                        position: absolute;
+                        left: 300px;
+                        padding: 5px 10px;
+                        background-color: rgba(255, 255, 255, 0.393);
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-weight: 400;
+
+                            &:hover {
+                            background-color: rgba(0, 0, 0, 0.52);
+                            color: white;
+
+                            .fa-play  {
+                                color: white;
+                            }
+                        }
+
+                        .fa-play {
+                            color: #000000a2;
+                            margin-right: 5px;
+                        }
+                    }
+
+                    #similar-btn {
+                        position: absolute;
+                        left: 400px;
+                        padding: 5px 10px;
+                        background-color: rgba(255, 255, 255, 0.393);
+                        border-radius: 5px;
+                        display: flex;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: rgba(0, 0, 0, 0.52);
+                            color: white;
+
+                            .fa-magnifying-glass {
+                                color: white;
+                            }
+                        }
+
+                        .fa-magnifying-glass {
+                             color: #000000a2;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+
+            #goods-card-view-right {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                width: 50%;
+                position: relative;
+
+                #goods-card-view-right-top {
+                padding: 40px;
+
+                    .fa-xmark {
+                        position: absolute;
+                        top: 25px;
+                        right: 25px;
+                        font-size: 22px;
+                        color: gray;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: black;
+                        }
+                    }
+
+                    #product-view {
+                        font-size: 26px;
+                        font-weight: 700;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+                        
+
+                        &:hover {
+                            color: rgb(217, 0, 255);
+                        }
+                    }
+
+                    #grade-view {
+                        margin-top: 20px;
+
+                        #rating {
+                            display: inline-block;
+                            cursor: pointer;
+                            font-size: 18px;
+                            
+                            .fa-star {
+                                color: orange;
+                            }
+
+                            #average-rating {
+                                font-weight: 700;
+                                margin-left: 8px;
+                            }
+                        }
+
+                        #number-of-ratings {
+                            color: gray;
+                            font-size: 18px;
+                            margin-left: 10px;
+                            border-bottom: 1px dashed gray;
+                            cursor: pointer;
+
+                            &:hover {
+                                color: black
+                            }
+
+                            #text-of-ratings {
+                                font-size: 14px;
+                            }
+
+                        }
+
+                        #article {
+                            color: gray;
+                            cursor: pointer;
+                            margin-left: 10px;
+
+                            .fa-copy {
+                                margin-left: 8px;
+                            }
+
+                            &:hover {
+                                #article-number {
+                                    color: black;
+                                }
+                            }
+
+                        }
+                    }
+
+                    #price-view {
+                        margin-top: 20px;
+
+                        #current-price{
+                            font-size: 22px;
+                            font-weight: 700;
+
+                            #dollar {
+                                margin-left: 5px;
+                            }
+                        }
+
+                        #price-before-discount {
+                            margin-left: 15px;
+                            text-decoration: line-through;
+                            color: gray;
+                            font-weight: 200;
+
+                            #dollar {
+                                margin-left: 2px;
+                            }
+                        }
+                    }
+
+                    #basket-button-view-wrap {
+                        margin-top: 30px;
+                        display: flex;
+                        align-items: center;
+    
+                        #basket-button {
+                            width: 85%;
+                            height: 45px;
+                            border-radius: 10px;
+                            border: none;
+                            background-color: rgb(217, 0, 255);
+                            color: white;
+                            cursor: pointer;
+                            font-weight: 700;
+                            font-size: 17px;
+    
+                            &:hover {
+                                background-color: rgb(222, 33, 255);
+                            }
+                        }
+    
+                        .fa-heart {
+                            margin-left: 35px;
+                            font-size: 26px;
+                            cursor: pointer;
+    
+                            &:hover {
+                                color: rgb(217, 0, 255);
+                            }
+                        }
+                    }
+                }
+
+            #goods-card-view-right-bottom {
+                #more-info-view {
+                    padding: 30px 0px;
+                    text-align: center;
+                    font-size: 20px;
+                    cursor: pointer;
+                    box-shadow: 0px -5px 14px 0px #0000002a;
+                    font-weight: 700;
+
+                    &:hover {
+                        color: rgb(217, 0, 255);
+                    }
+                }
+            }
+            } 
+        }
+    }

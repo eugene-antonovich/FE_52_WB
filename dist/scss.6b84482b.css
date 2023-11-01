@@ -1,2 +1,512 @@
+@import url("https://fonts.googleapis.com/css2?family=Cardo:ital@1&family=Raleway:wght@200;400;700&display=swap");@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
+#header {
+  padding: 40px 0px 60px;
+  background: linear-gradient(to right, #cb11ab 0, #481173 100%);
+  position: absolute;
+  width: 100%;
+}
+#header #header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#header #header-wrap #header-logo {
+  color: white;
+  font-size: 50px;
+  text-transform: uppercase;
+  margin: 0px 10px;
+  max-width: 331px;
+}
+#header #header-wrap #header-search {
+  width: 715px;
+}
+#header #header-wrap #header-search #search {
+  width: 100%;
+  height: 58.5px;
+  border-radius: 56px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.177);
+  outline: none;
+  color: white;
+  padding: 0px 50px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 0px 10px;
+}
+#header #header-wrap #header-search #search:hover {
+  background-color: rgba(255, 255, 255, 0.333);
+}
+#header #header-wrap #header-search ::placeholder {
+  color: rgba(255, 255, 255, 0.398);
+  font-size: 18px;
+  font-weight: 700;
+}
+#header #header-wrap #location,
+#header #header-wrap #user,
+#header #header-wrap #basket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.452);
+  outline: none;
+  font-size: 16px;
+  margin: 0px 10px;
+}
+#header #header-wrap #location:hover,
+#header #header-wrap #user:hover,
+#header #header-wrap #basket:hover {
+  color: white;
+}
+#header #header-wrap .fa-location-dot,
+#header #header-wrap .fa-user,
+#header #header-wrap .fa-cart-shopping {
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 20px;
+  color: white;
+  margin-bottom: 10px;
+}
+.swiper-section {
+  padding: 50px 0px;
+  border-radius: 30px;
+  position: relative;
+  top: 130px;
+  background-color: white;
+  z-index: 1;
+}
+.swiper-section .swiper {
+  cursor: pointer;
+  width: 90%;
+  border-radius: 20px;
+}
+.swiper-section .swiper .swiper-button-prev {
+  left: 30px;
+}
+.swiper-section .swiper .swiper-button-next {
+  right: 30px;
+}
+.swiper-section .swiper .swiper-button-prev,
+.swiper-section .swiper .swiper-button-next {
+  display: none;
+  background-color: rgba(255, 255, 255, 0.621);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.282);
+}
+.swiper-section .swiper .swiper-button-prev:hover,
+.swiper-section .swiper .swiper-button-next:hover {
+  background-color: #fff;
+  color: black;
+}
+.swiper-section .swiper .swiper-button-next::after,
+.swiper-section .swiper .swiper-button-prev::after {
+  font-size: 15px;
+}
+.swiper-section .swiper .swiper-pagination-bullet {
+  background-color: white;
+  width: 5px;
+  height: 5px;
+}
+.swiper-section .swiper .active {
+  display: flex;
+}
+#goods-cards-wrap {
+  position: relative;
+  top: 140px;
+  display: flex;
+  flex-wrap: wrap;
+}
 
+#goods-card {
+  padding: 5px;
+  width: 213px;
+  margin: -20px 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 15px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.5s;
+  background-color: transparent;
+}
+#goods-card #goods-card-img {
+  width: 100%;
+  height: 263px;
+  position: relative;
+}
+#goods-card #goods-card-img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+}
+#goods-card #price {
+  margin-top: 20px;
+}
+#goods-card #price #current-price {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px;
+  font-weight: 700;
+}
+#goods-card #price #current-price #dollar {
+  margin-left: 5px;
+  font-size: 18px;
+}
+#goods-card #price #price-before-discount {
+  font-size: 14px;
+  font-weight: 200;
+  text-decoration: line-through;
+  text-decoration-color: rgba(0, 0, 0, 0.251);
+  color: rgba(0, 0, 0, 0.526);
+  margin-left: 20px;
+}
+#goods-card #price #price-before-discount #dollar {
+  margin-left: 5px;
+  font-size: 12px;
+}
+#goods-card #product {
+  margin-top: 5px;
+}
+#goods-card #product #company {
+  font-size: 18px;
+}
+#goods-card #product #product-description {
+  color: rgba(0, 0, 0, 0.526);
+}
+#goods-card #grade {
+  margin-top: 5px;
+}
+#goods-card #grade .fa-star {
+  color: orange;
+  font-size: 14px;
+}
+#goods-card #grade #average-rating {
+  font-weight: 700;
+}
+#goods-card #grade #number-of-ratings {
+  color: rgba(0, 0, 0, 0.526);
+  margin-left: 20px;
+  position: relative;
+}
+#goods-card #grade #number-of-ratings::before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 5px;
+  height: 5px;
+  background-color: rgba(0, 0, 0, 0.235);
+  border-radius: 45%;
+  top: 50%;
+  left: -17%;
+}
+#goods-card #delivery {
+  margin-top: 5px;
+}
+#goods-card #delivery #delivery-text {
+  color: rgba(0, 0, 0, 0.526);
+}
+#goods-card #delivery #delivery-date {
+  color: black;
+}
+#goods-card #basket-button-wrap {
+  margin: 10px 0px;
+  background-color: transparent;
+}
+#goods-card #basket-button-wrap #basket-button {
+  width: 110px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  border-radius: 7px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+#goods-card:hover {
+  box-shadow: 0px 0px 2px 2px gainsboro;
+  white-space: normal;
+  z-index: 1;
+  background-color: white;
+}
+#goods-card:hover #basket-button-wrap #basket-button {
+  background-color: rgb(217, 0, 255);
+}
+#goods-card:hover #basket-button-wrap #basket-button:hover {
+  background-color: rgb(222, 33, 255);
+}
+#goods-card:hover #goods-card-img::before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.754);
+  top: 80%;
+}
+#goods-card:hover #img-quick-view {
+  position: absolute;
+  top: 86%;
+  right: 50%;
+  transform: translate(50%);
+  font-size: 18px;
+}
+#goods-card:hover .fa-heart {
+  font-size: 22px;
+  background-color: transparent;
+  position: absolute;
+  top: 5%;
+  right: 7%;
+}
+#goods-card:hover .fa-heart:hover {
+  color: rgb(217, 0, 255);
+}
+body::after {
+  display: block;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.243);
+  position: absolute;
+  width: 100%;
+  height: 130%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: none;
+}
+
+#goods-card-view-wrap {
+  width: 70%;
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  z-index: 3;
+  box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.0901960784);
+  display: none;
+}
+#goods-card-view-wrap #goods-card-view {
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left {
+  position: relative;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left img {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left #view-left-button-wrap {
+  position: absolute;
+  top: 93%;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left #view-left-button-wrap #photo-number {
+  position: absolute;
+  left: 20px;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.393);
+  border-radius: 20px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left #view-left-button-wrap #video-btn {
+  display: flex;
+  position: absolute;
+  left: 300px;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.393);
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 400;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left #view-left-button-wrap #video-btn:hover {
+  background-color: rgba(0, 0, 0, 0.52);
+  color: white;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left #view-left-button-wrap #video-btn:hover .fa-play {
+  color: white;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left #view-left-button-wrap #video-btn .fa-play {
+  color: rgba(0, 0, 0, 0.6352941176);
+  margin-right: 5px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left #view-left-button-wrap #similar-btn {
+  position: absolute;
+  left: 400px;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.393);
+  border-radius: 5px;
+  display: flex;
+  cursor: pointer;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left #view-left-button-wrap #similar-btn:hover {
+  background-color: rgba(0, 0, 0, 0.52);
+  color: white;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left #view-left-button-wrap #similar-btn:hover .fa-magnifying-glass {
+  color: white;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-left #view-left-button-wrap #similar-btn .fa-magnifying-glass {
+  color: rgba(0, 0, 0, 0.6352941176);
+  margin-right: 5px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 50%;
+  position: relative;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top {
+  padding: 40px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top .fa-xmark {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 22px;
+  color: gray;
+  cursor: pointer;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top .fa-xmark:hover {
+  color: black;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #product-view {
+  font-size: 26px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #product-view:hover {
+  color: rgb(217, 0, 255);
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #grade-view {
+  margin-top: 20px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #grade-view #rating {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 18px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #grade-view #rating .fa-star {
+  color: orange;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #grade-view #rating #average-rating {
+  font-weight: 700;
+  margin-left: 8px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #grade-view #number-of-ratings {
+  color: gray;
+  font-size: 18px;
+  margin-left: 10px;
+  border-bottom: 1px dashed gray;
+  cursor: pointer;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #grade-view #number-of-ratings:hover {
+  color: black;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #grade-view #number-of-ratings #text-of-ratings {
+  font-size: 14px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #grade-view #article {
+  color: gray;
+  cursor: pointer;
+  margin-left: 10px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #grade-view #article .fa-copy {
+  margin-left: 8px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #grade-view #article:hover #article-number {
+  color: black;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #price-view {
+  margin-top: 20px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #price-view #current-price {
+  font-size: 22px;
+  font-weight: 700;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #price-view #current-price #dollar {
+  margin-left: 5px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #price-view #price-before-discount {
+  margin-left: 15px;
+  text-decoration: line-through;
+  color: gray;
+  font-weight: 200;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #price-view #price-before-discount #dollar {
+  margin-left: 2px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #basket-button-view-wrap {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #basket-button-view-wrap #basket-button {
+  width: 85%;
+  height: 45px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(217, 0, 255);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 17px;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #basket-button-view-wrap #basket-button:hover {
+  background-color: rgb(222, 33, 255);
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #basket-button-view-wrap .fa-heart {
+  margin-left: 35px;
+  font-size: 26px;
+  cursor: pointer;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-top #basket-button-view-wrap .fa-heart:hover {
+  color: rgb(217, 0, 255);
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-bottom #more-info-view {
+  padding: 30px 0px;
+  text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0px -5px 14px 0px rgba(0, 0, 0, 0.1647058824);
+  font-weight: 700;
+}
+#goods-card-view-wrap #goods-card-view #goods-card-view-right #goods-card-view-right-bottom #more-info-view:hover {
+  color: rgb(217, 0, 255);
+}
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: Raleway;
+  scroll-behavior: smooth;
+}
+
+#container {
+  max-width: 1370px;
+  margin: auto;
+  padding: 0 15px;
+  position: relative;
+}
 /*# sourceMappingURL=/scss.6b84482b.css.map */

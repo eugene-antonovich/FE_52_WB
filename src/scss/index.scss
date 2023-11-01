@@ -1,0 +1,28 @@
+@import url("./_fonts.scss");
+@import url("./_icons.scss");
+@import url("./header.scss");
+@import url("./slider.scss");
+@import url("./goods.scss");
+@import url("./goods_view.scss");
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: Raleway;
+    scroll-behavior: smooth;
+}
+
+#container {
+    max-width: 1370px;
+    margin: auto;
+    padding: 0 15px;
+    position: relative;
+}
+
