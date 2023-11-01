@@ -37,6 +37,9 @@ const swiper = new Swiper('.swiper', {
     slides[currentSlide].style.display = 'none';
     currentSlide = (i + slides.length) % slides.length;
     slides[currentSlide].style.display = 'block'
+    if(i > 10) {
+      currentSlide = 0
+    }
   }
 
   function nextSlide() {

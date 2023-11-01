@@ -149,6 +149,9 @@ function showSlide(i) {
   slides[currentSlide].style.display = 'none';
   currentSlide = (i + slides.length) % slides.length;
   slides[currentSlide].style.display = 'block';
+  if (i > 10) {
+    currentSlide = 0;
+  }
 }
 function nextSlide() {
   showSlide(currentSlide + 1);
@@ -179,7 +182,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49462" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59728" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
