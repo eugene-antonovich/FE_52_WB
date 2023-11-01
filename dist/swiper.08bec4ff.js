@@ -117,8 +117,43 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/index.js":[function(require,module,exports) {
-
+})({"js/swiper.js":[function(require,module,exports) {
+var swiper = new Swiper('.swiper', {
+  loop: true,
+  pagination: {
+    el: '.swiper-pagination'
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
+  }
+});
+var swiperWrap = document.getElementById('swiper-mouse');
+var swiperBtnNext = document.getElementById('next');
+var swiperBtnPrev = document.getElementById('prev');
+var currentSlide = 0;
+var slides = document.querySelectorAll('.swiper-slide');
+swiperWrap.addEventListener('mouseover', active);
+swiperWrap.addEventListener('mouseover', active);
+swiperWrap.addEventListener('mouseout', notActie);
+swiperWrap.addEventListener('mouseout', notActie);
+function active() {
+  swiperBtnNext.classList.add('active');
+  swiperBtnPrev.classList.add('active');
+}
+function notActie() {
+  swiperBtnNext.classList.remove('active');
+  swiperBtnPrev.classList.remove('active');
+}
+function showSlide(i) {
+  slides[currentSlide].style.display = 'none';
+  currentSlide = (i + slides.length) % slides.length;
+  slides[currentSlide].style.display = 'block';
+}
+function nextSlide() {
+  showSlide(currentSlide + 1);
+}
+setInterval(nextSlide, 4000);
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -144,7 +179,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57927" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49462" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
@@ -288,5 +323,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
-//# sourceMappingURL=/js.00a46daa.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/swiper.js"], null)
+//# sourceMappingURL=/swiper.08bec4ff.js.map

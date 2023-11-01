@@ -117,8 +117,46 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/index.js":[function(require,module,exports) {
-
+})({"js/header.js":[function(require,module,exports) {
+var headerLogo = document.getElementById('header-logo');
+var input = document.getElementById('search');
+var dropdown = document.getElementById('dropdown');
+var camera = document.getElementById('camera');
+var searchPhoto = document.getElementById('search-photo');
+var glass = document.getElementById('glass');
+camera.addEventListener('mouseover', cameraActive);
+camera.addEventListener('mouseout', cameraNotActive);
+input.addEventListener('click', searchColor);
+input.addEventListener('click', drop);
+document.body.addEventListener('click', function (event) {
+  if (event.target !== input && event.target !== dropdown) {
+    dropdown.style.display = 'none';
+    input.classList.remove('search-active');
+    glass.style.color = '';
+    glass.style.zIndex = '';
+    camera.style.color = '';
+    camera.style.zIndex = '';
+  }
+});
+headerLogo.addEventListener('click', function () {
+  location.reload();
+});
+function drop() {
+  dropdown.style.display = 'block';
+}
+function searchColor() {
+  input.classList.add('search-active');
+  glass.style.color = 'gray';
+  glass.style.zIndex = '4';
+  camera.style.color = 'gray';
+  camera.style.zIndex = '4';
+}
+function cameraActive() {
+  searchPhoto.style.display = 'block';
+}
+function cameraNotActive() {
+  searchPhoto.style.display = 'none';
+}
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -288,5 +326,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
-//# sourceMappingURL=/js.00a46daa.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/header.js"], null)
+//# sourceMappingURL=/header.4485232e.js.map

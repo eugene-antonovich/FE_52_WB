@@ -160,10 +160,13 @@
     
                 #img-quick-view {
                     position: absolute;
-                    top: 86%;
+                    top: 81%;
                     right: 50%;
                     transform: translate(50%);
                     font-size: 18px;
+                    width: 100%;
+                    text-align: center;
+                    padding: 13px 20px;
                 }
 
                 .fa-heart {

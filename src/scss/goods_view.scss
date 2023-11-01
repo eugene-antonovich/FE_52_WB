@@ -1,15 +1,3 @@
-body::after {
-    display: block;
-    content: '';
-    background-color: rgba(0, 0, 0, 0.243) ;
-    position: absolute;
-    width: 100%;
-    height: 130%;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    display: none;
-}
 #goods-card-view-wrap {
         width: 70%;
         background-color: white;
@@ -114,19 +102,24 @@ body::after {
 
                 #goods-card-view-right-top {
                 padding: 40px;
+                
+                    #exit-view-card {
+                        border: none;
 
-                    .fa-xmark {
-                        position: absolute;
-                        top: 25px;
-                        right: 25px;
-                        font-size: 22px;
-                        color: gray;
-                        cursor: pointer;
-
-                        &:hover {
-                            color: black;
+                        .fa-xmark {
+                            position: absolute;
+                            top: 25px;
+                            right: 25px;
+                            font-size: 22px;
+                            color: gray;
+                            cursor: pointer;
+    
+                            &:hover {
+                                color: black;
+                            }
                         }
                     }
+                 
 
                     #product-view {
                         font-size: 26px;
@@ -268,3 +261,15 @@ body::after {
             } 
         }
     }
+
+    .active-body::after {
+            display: block;
+            content: '';
+            background-color: rgba(0, 0, 0, 0.339) ;
+            position: absolute;
+            width: 100%;
+            height: 130%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }

@@ -117,8 +117,38 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/index.js":[function(require,module,exports) {
-
+})({"js/basket.js":[function(require,module,exports) {
+var buttonUp = document.getElementById('chevron-up');
+var chevronUp = document.getElementById('up');
+var basketLeftCardsWrap = document.getElementById('basket-left-cards-wrap');
+var buttonDown = document.getElementById('chevron-down');
+var chevronDown = document.getElementById('down');
+var basketSection = document.getElementById('basket-section');
+var basket = document.getElementById('basket');
+var swiperSection = document.getElementById('swiper-mouse');
+var goodsSection = document.getElementById('goods');
+basket.addEventListener('click', openCloseBasket);
+buttonUp.addEventListener('click', chevronUpEvent);
+buttonDown.addEventListener('click', chevronDownEvent);
+function openCloseBasket() {
+  swiperSection.style.display = 'none';
+  goodsSection.style.display = 'none';
+  basketSection.style.display = 'block';
+}
+function chevronUpEvent() {
+  basketLeftCardsWrap.style.display = 'none';
+  buttonUp.style.display = 'none';
+  chevronUp.style.display = 'none';
+  buttonDown.style.display = 'block';
+  chevronDown.style.display = 'block';
+}
+function chevronDownEvent() {
+  basketLeftCardsWrap.style.display = 'block';
+  buttonUp.style.display = 'block';
+  chevronUp.style.display = 'block';
+  buttonDown.style.display = 'none';
+  chevronDown.style.display = 'none';
+}
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -288,5 +318,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
-//# sourceMappingURL=/js.00a46daa.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/basket.js"], null)
+//# sourceMappingURL=/basket.4a0189c5.js.map
