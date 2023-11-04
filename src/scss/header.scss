@@ -168,7 +168,10 @@
                 font-size: 14px;
                 top: -7px;
                 right: 25px;
-                // display: none;
+
+                .basket-sum-not-active {
+                    display: none;
+                }
             }
         }
 

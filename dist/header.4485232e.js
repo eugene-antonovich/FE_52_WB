@@ -124,6 +124,10 @@ var dropdown = document.getElementById('dropdown');
 var camera = document.getElementById('camera');
 var searchPhoto = document.getElementById('search-photo');
 var glass = document.getElementById('glass');
+var basket = document.getElementById('basket');
+var swiperSection = document.getElementsByClassName('swiper-section');
+var goodsSection = document.getElementById('goods');
+var basketSection = document.getElementById('basket-section');
 camera.addEventListener('mouseover', cameraActive);
 camera.addEventListener('mouseout', cameraNotActive);
 input.addEventListener('click', searchColor);
@@ -182,7 +186,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59728" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56993" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

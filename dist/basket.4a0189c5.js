@@ -118,36 +118,159 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/basket.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createBasketCard = createBasketCard;
 var buttonUp = document.getElementById('chevron-up');
 var chevronUp = document.getElementById('up');
-var basketLeftCardsWrap = document.getElementById('basket-left-cards-wrap');
 var buttonDown = document.getElementById('chevron-down');
 var chevronDown = document.getElementById('down');
 var basketSection = document.getElementById('basket-section');
 var basket = document.getElementById('basket');
 var swiperSection = document.getElementById('swiper-mouse');
 var goodsSection = document.getElementById('goods');
-basket.addEventListener('click', openCloseBasket);
-buttonUp.addEventListener('click', chevronUpEvent);
-buttonDown.addEventListener('click', chevronDownEvent);
-function openCloseBasket() {
-  swiperSection.style.display = 'none';
-  goodsSection.style.display = 'none';
-  basketSection.style.display = 'block';
-}
-function chevronUpEvent() {
-  basketLeftCardsWrap.style.display = 'none';
-  buttonUp.style.display = 'none';
-  chevronUp.style.display = 'none';
-  buttonDown.style.display = 'block';
-  chevronDown.style.display = 'block';
-}
-function chevronDownEvent() {
-  basketLeftCardsWrap.style.display = 'block';
-  buttonUp.style.display = 'block';
-  chevronUp.style.display = 'block';
-  buttonDown.style.display = 'none';
-  chevronDown.style.display = 'none';
+var basketLeftCardsWrap = document.getElementById('basket-left-cards-wrap');
+var headerBasketSum = document.getElementById('header-basket-sum');
+var goodsQuantity = document.getElementById('goods-quantity');
+var basketPriceGoods = document.getElementById('basket-price-goods');
+var basketPriceSumTop = document.createElement('div');
+basketPriceSumTop.classList.add('goods-price-sum-top');
+var basketPriceSumBottom = document.createElement('div');
+basketPriceSumBottom.classList.add('goods-price-sum-bottom');
+headerBasketSum.innerHTML = basketLeftCardsWrap.children.length;
+var ar = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : [];
+var basketSumTop = 0;
+var basketSumBottom = 0;
+function createBasketCard(id, img, product, name, price, price2) {
+  var basketLeftCardsWrap = document.getElementById('basket-left-cards-wrap');
+  var basketLeftCard = document.createElement('div');
+  var basketLeftCardImg = document.createElement('div');
+  var basketImg = document.createElement('img');
+  var basketLeftCardProduct = document.createElement('div');
+  var basketProductDescription = document.createElement('span');
+  var basketCompany = document.createElement('span');
+  var basketLeftCardCounter = document.createElement('div');
+  var basketCounterMinus = document.createElement('button');
+  var faMinus = document.createElement('i');
+  var basketCounterSum = document.createElement('span');
+  var basketCounterPlus = document.createElement('button');
+  var faPlus = document.createElement('i');
+  var basketLeftCardPrice = document.createElement('div');
+  var basketCurrentPrice = document.createElement('span');
+  var basketPriceBeforeDiscount = document.createElement('span');
+  var basketLeftCardIcons = document.createElement('div');
+  var faHeart = document.createElement('i');
+  var faTrash = document.createElement('i');
+  basketLeftCard.id = id;
+  basketLeftCard.classList.add('basket-left-card');
+  basketLeftCardImg.id = 'basket-left-card-img';
+  basketImg.setAttribute('src', img);
+  basketLeftCardProduct.id = 'basket-left-card-product';
+  basketProductDescription.id = 'basket-product-description';
+  basketCompany.id = 'basket-company';
+  basketLeftCardCounter.id = 'basket-left-card-counter';
+  basketCounterMinus.id = 'basket-counter-minus';
+  faMinus.classList.add('fa-solid');
+  faMinus.classList.add('fa-minus');
+  faPlus.classList.add('fa-solid');
+  faPlus.classList.add('fa-plus');
+  basketCounterSum.id = 'basket-counter-sum';
+  basketCounterPlus.id = 'basket-counter-plus';
+  basketLeftCardPrice.id = 'basket-left-card-price';
+  basketCurrentPrice.id = 'basket-current-price';
+  basketPriceBeforeDiscount.id = 'basket-price-before-discount';
+  basketLeftCardIcons.id = 'basket-left-card-icons';
+  faHeart.classList.add('fa-solid');
+  faHeart.classList.add('fa-heart');
+  faTrash.classList.add('fa-solid');
+  faTrash.classList.add('fa-trash');
+  basketLeftCardsWrap.append(basketLeftCard);
+  basketLengthCheck();
+  basketLeftCard.append(basketLeftCardImg);
+  basketLeftCardImg.append(basketImg);
+  basketLeftCard.append(basketLeftCardProduct);
+  basketLeftCardProduct.append(basketProductDescription);
+  basketLeftCardProduct.append(basketCompany);
+  basketLeftCard.append(basketLeftCardCounter);
+  basketLeftCardCounter.append(basketCounterMinus);
+  basketCounterMinus.append(faMinus);
+  basketLeftCardCounter.append(basketCounterSum);
+  basketLeftCardCounter.append(basketCounterPlus);
+  basketCounterPlus.append(faPlus);
+  basketLeftCard.append(basketLeftCardPrice);
+  basketLeftCardPrice.append(basketCurrentPrice);
+  basketLeftCardPrice.append(basketPriceBeforeDiscount);
+  basketLeftCard.append(basketLeftCardIcons);
+  basketLeftCardIcons.append(faHeart);
+  basketLeftCardIcons.append(faTrash);
+  basketProductDescription.innerHTML = "".concat(product, ", ");
+  basketCompany.innerHTML = "".concat(name);
+  basketCurrentPrice.innerHTML = "".concat(price, "$");
+  basketPriceBeforeDiscount.innerHTML = "".concat(price2, "$");
+  basketCounterSum.innerHTML = "1";
+  basket.addEventListener('click', openCloseBasket);
+  buttonUp.addEventListener('click', chevronUpEvent);
+  buttonDown.addEventListener('click', chevronDownEvent);
+  faTrash.addEventListener('click', removeCard);
+  faTrash.addEventListener('click', basketLengthCheck);
+  faTrash.addEventListener('click', parentTrash);
+  function sum1() {
+    return basketSumTop += +price;
+  }
+  function sum2() {
+    return basketSumBottom += +price;
+  }
+  function sum3() {
+    return basketSumTop -= +price;
+  }
+  function sum4() {
+    return basketSumBottom -= +price;
+  }
+  function parentTrash() {
+    var parentEl = faTrash.parentNode;
+    var grandParentEl = +parentEl.parentNode.id;
+    var filteredAr = ar.filter(function (item) {
+      return item.id !== grandParentEl;
+    });
+    priceBasket(sum3(), sum4());
+    localStorage.setItem('basket', JSON.stringify(filteredAr));
+  }
+  function basketLengthCheck() {
+    headerBasketSum.innerHTML = basketLeftCardsWrap.children.length;
+    goodsQuantity.innerHTML = basketLeftCardsWrap.children.length;
+  }
+  function removeCard() {
+    basketLeftCard.remove();
+  }
+  function openCloseBasket() {
+    swiperSection.style.display = 'none';
+    goodsSection.style.display = 'none';
+    basketSection.style.display = 'block';
+  }
+  function chevronUpEvent() {
+    basketLeftCardsWrap.style.display = 'none';
+    buttonUp.style.display = 'none';
+    chevronUp.style.display = 'none';
+    buttonDown.style.display = 'block';
+    chevronDown.style.display = 'block';
+  }
+  function chevronDownEvent() {
+    basketLeftCardsWrap.style.display = 'block';
+    buttonUp.style.display = 'block';
+    chevronUp.style.display = 'block';
+    buttonDown.style.display = 'none';
+    chevronDown.style.display = 'none';
+  }
+  basketPriceGoods.append(basketPriceSumTop);
+  basketPriceGoods.append(basketPriceSumBottom);
+  function priceBasket(a, b) {
+    basketPriceSumTop.textContent = "".concat(a, "$");
+    basketPriceSumBottom.innerHTML = "".concat(b, "$");
+  }
+  priceBasket(sum1(), sum2());
 }
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -174,7 +297,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59728" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56993" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

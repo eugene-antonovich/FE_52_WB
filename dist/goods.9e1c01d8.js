@@ -117,24 +117,453 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/goods.js":[function(require,module,exports) {
+})({"js/basket.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createBasketCard = createBasketCard;
+var buttonUp = document.getElementById('chevron-up');
+var chevronUp = document.getElementById('up');
+var buttonDown = document.getElementById('chevron-down');
+var chevronDown = document.getElementById('down');
+var basketSection = document.getElementById('basket-section');
+var basket = document.getElementById('basket');
+var swiperSection = document.getElementById('swiper-mouse');
+var goodsSection = document.getElementById('goods');
+var basketLeftCardsWrap = document.getElementById('basket-left-cards-wrap');
+var headerBasketSum = document.getElementById('header-basket-sum');
+var goodsQuantity = document.getElementById('goods-quantity');
+var basketPriceGoods = document.getElementById('basket-price-goods');
+var basketPriceSumTop = document.createElement('div');
+basketPriceSumTop.classList.add('goods-price-sum-top');
+var basketPriceSumBottom = document.createElement('div');
+basketPriceSumBottom.classList.add('goods-price-sum-bottom');
+headerBasketSum.innerHTML = basketLeftCardsWrap.children.length;
+var ar = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : [];
+var basketSumTop = 0;
+var basketSumBottom = 0;
+function createBasketCard(id, img, product, name, price, price2) {
+  var basketLeftCardsWrap = document.getElementById('basket-left-cards-wrap');
+  var basketLeftCard = document.createElement('div');
+  var basketLeftCardImg = document.createElement('div');
+  var basketImg = document.createElement('img');
+  var basketLeftCardProduct = document.createElement('div');
+  var basketProductDescription = document.createElement('span');
+  var basketCompany = document.createElement('span');
+  var basketLeftCardCounter = document.createElement('div');
+  var basketCounterMinus = document.createElement('button');
+  var faMinus = document.createElement('i');
+  var basketCounterSum = document.createElement('span');
+  var basketCounterPlus = document.createElement('button');
+  var faPlus = document.createElement('i');
+  var basketLeftCardPrice = document.createElement('div');
+  var basketCurrentPrice = document.createElement('span');
+  var basketPriceBeforeDiscount = document.createElement('span');
+  var basketLeftCardIcons = document.createElement('div');
+  var faHeart = document.createElement('i');
+  var faTrash = document.createElement('i');
+  basketLeftCard.id = id;
+  basketLeftCard.classList.add('basket-left-card');
+  basketLeftCardImg.id = 'basket-left-card-img';
+  basketImg.setAttribute('src', img);
+  basketLeftCardProduct.id = 'basket-left-card-product';
+  basketProductDescription.id = 'basket-product-description';
+  basketCompany.id = 'basket-company';
+  basketLeftCardCounter.id = 'basket-left-card-counter';
+  basketCounterMinus.id = 'basket-counter-minus';
+  faMinus.classList.add('fa-solid');
+  faMinus.classList.add('fa-minus');
+  faPlus.classList.add('fa-solid');
+  faPlus.classList.add('fa-plus');
+  basketCounterSum.id = 'basket-counter-sum';
+  basketCounterPlus.id = 'basket-counter-plus';
+  basketLeftCardPrice.id = 'basket-left-card-price';
+  basketCurrentPrice.id = 'basket-current-price';
+  basketPriceBeforeDiscount.id = 'basket-price-before-discount';
+  basketLeftCardIcons.id = 'basket-left-card-icons';
+  faHeart.classList.add('fa-solid');
+  faHeart.classList.add('fa-heart');
+  faTrash.classList.add('fa-solid');
+  faTrash.classList.add('fa-trash');
+  basketLeftCardsWrap.append(basketLeftCard);
+  basketLengthCheck();
+  basketLeftCard.append(basketLeftCardImg);
+  basketLeftCardImg.append(basketImg);
+  basketLeftCard.append(basketLeftCardProduct);
+  basketLeftCardProduct.append(basketProductDescription);
+  basketLeftCardProduct.append(basketCompany);
+  basketLeftCard.append(basketLeftCardCounter);
+  basketLeftCardCounter.append(basketCounterMinus);
+  basketCounterMinus.append(faMinus);
+  basketLeftCardCounter.append(basketCounterSum);
+  basketLeftCardCounter.append(basketCounterPlus);
+  basketCounterPlus.append(faPlus);
+  basketLeftCard.append(basketLeftCardPrice);
+  basketLeftCardPrice.append(basketCurrentPrice);
+  basketLeftCardPrice.append(basketPriceBeforeDiscount);
+  basketLeftCard.append(basketLeftCardIcons);
+  basketLeftCardIcons.append(faHeart);
+  basketLeftCardIcons.append(faTrash);
+  basketProductDescription.innerHTML = "".concat(product, ", ");
+  basketCompany.innerHTML = "".concat(name);
+  basketCurrentPrice.innerHTML = "".concat(price, "$");
+  basketPriceBeforeDiscount.innerHTML = "".concat(price2, "$");
+  basketCounterSum.innerHTML = "1";
+  basket.addEventListener('click', openCloseBasket);
+  buttonUp.addEventListener('click', chevronUpEvent);
+  buttonDown.addEventListener('click', chevronDownEvent);
+  faTrash.addEventListener('click', removeCard);
+  faTrash.addEventListener('click', basketLengthCheck);
+  faTrash.addEventListener('click', parentTrash);
+  function sum1() {
+    return basketSumTop += +price;
+  }
+  function sum2() {
+    return basketSumBottom += +price;
+  }
+  function sum3() {
+    return basketSumTop -= +price;
+  }
+  function sum4() {
+    return basketSumBottom -= +price;
+  }
+  function parentTrash() {
+    var parentEl = faTrash.parentNode;
+    var grandParentEl = +parentEl.parentNode.id;
+    var filteredAr = ar.filter(function (item) {
+      return item.id !== grandParentEl;
+    });
+    priceBasket(sum3(), sum4());
+    localStorage.setItem('basket', JSON.stringify(filteredAr));
+  }
+  function basketLengthCheck() {
+    headerBasketSum.innerHTML = basketLeftCardsWrap.children.length;
+    goodsQuantity.innerHTML = basketLeftCardsWrap.children.length;
+  }
+  function removeCard() {
+    basketLeftCard.remove();
+  }
+  function openCloseBasket() {
+    swiperSection.style.display = 'none';
+    goodsSection.style.display = 'none';
+    basketSection.style.display = 'block';
+  }
+  function chevronUpEvent() {
+    basketLeftCardsWrap.style.display = 'none';
+    buttonUp.style.display = 'none';
+    chevronUp.style.display = 'none';
+    buttonDown.style.display = 'block';
+    chevronDown.style.display = 'block';
+  }
+  function chevronDownEvent() {
+    basketLeftCardsWrap.style.display = 'block';
+    buttonUp.style.display = 'block';
+    chevronUp.style.display = 'block';
+    buttonDown.style.display = 'none';
+    chevronDown.style.display = 'none';
+  }
+  basketPriceGoods.append(basketPriceSumTop);
+  basketPriceGoods.append(basketPriceSumBottom);
+  function priceBasket(a, b) {
+    basketPriceSumTop.textContent = "".concat(a, "$");
+    basketPriceSumBottom.innerHTML = "".concat(b, "$");
+  }
+  priceBasket(sum1(), sum2());
+}
+},{}],"js/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.localStoragePromise = exports.localStorageBasket = void 0;
+var localStoragePromise = exports.localStoragePromise = JSON.parse(localStorage.getItem('promise'));
+var localStorageBasket = exports.localStorageBasket = JSON.parse(localStorage.getItem('basket-sum'));
+},{}],"js/goods.js":[function(require,module,exports) {
+"use strict";
+
+var _basket = require("./basket.js");
+var _index = require("./index.js");
 var cardWrap = document.getElementById('goods-cards-wrap');
 var card = document.getElementById('goods-card');
 var quickViewCard = document.getElementById('img-quick-view');
 var cardViewWrap = document.getElementById('goods-card-view-wrap');
 var exitCardViewWrap = document.getElementById('exit-view-card');
 var backgroundCardiew = document.getElementById('background-card-view');
-exitCardViewWrap.addEventListener('click', cardViewRemoveClass);
-quickViewCard.addEventListener('click', cardViewAddClass);
-function cardViewAddClass() {
-  cardViewWrap.style.display = 'block';
-  backgroundCardiew.classList.add('active-body');
+var urlMockApi = 'https://6540cac845bedb25bfc29fb1.mockapi.io/cards';
+fetch(urlMockApi).then(function (response) {
+  return response.json();
+}).then(function (promiseWrap) {
+  return localStorage.setItem('promise', JSON.stringify(promiseWrap));
+});
+function generateId() {
+  var randomValue = Math.floor(Math.random() * 10000 * 10000);
+  return randomValue;
 }
-function cardViewRemoveClass() {
-  cardViewWrap.style.display = '';
-  backgroundCardiew.classList.remove('active-body');
+function generateRatings() {
+  var randomValue = Math.floor(Math.random() * 1000);
+  return randomValue;
 }
-},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+function getRandomRating(min, max, decimals) {
+  var factor = Math.pow(10, decimals);
+  var randomValue = Math.random() * (max - min) + min;
+  return Math.round(randomValue * factor) / factor;
+}
+var thingsInBasket = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : [];
+var promiseWrap;
+for (var i = 0; i < _index.localStoragePromise.length; i++) {
+  _index.localStoragePromise[i].id = generateId();
+  createCard(_index.localStoragePromise[i].img, _index.localStoragePromise[i].price, _index.localStoragePromise[i].price2, _index.localStoragePromise[i].name, _index.localStoragePromise[i].product, _index.localStoragePromise[i].delivery, _index.localStoragePromise[i].id);
+}
+for (var _i = 0; _i < thingsInBasket.length; _i++) {
+  (0, _basket.createBasketCard)(thingsInBasket[_i].id, thingsInBasket[_i].img, thingsInBasket[_i].product, thingsInBasket[_i].name, thingsInBasket[_i].price, thingsInBasket[_i].price2);
+}
+function createCard(img, price, price2, name, product, delivery, id) {
+  var goodsCard = document.createElement('div');
+  var goodsCardImage = document.createElement('div');
+  var image = document.createElement('img');
+  var imgQuickiew = document.createElement('span');
+  var faHeart = document.createElement('i');
+  var goodsPrice = document.createElement('div');
+  var currentPrice = document.createElement('span');
+  var priceBeforeDiscount = document.createElement('span');
+  var goodsProduct = document.createElement('div');
+  var goodsCompany = document.createElement('span');
+  var goodsProductDescription = document.createElement('span');
+  var goodsGrade = document.createElement('div');
+  var faStar = document.createElement('i');
+  var averageRating = document.createElement('span');
+  var numberOfRatings = document.createElement('span');
+  var goodsDelivery = document.createElement('div');
+  var deliveryText = document.createElement('span');
+  var deliveryDate = document.createElement('span');
+  var basketButtonWrap = document.createElement('div');
+  var basketButton = document.createElement('button');
+  var randomRating = getRandomRating(3.0, 5.0, 1);
+  goodsCard.id = id;
+  goodsCard.classList.add('goods-card');
+  goodsCardImage.id = 'goods-card-img';
+  image.setAttribute('src', img);
+  imgQuickiew.classList.add('img-quick-view');
+  faHeart.classList.add('fa-regular');
+  faHeart.classList.add('fa-heart');
+  goodsPrice.id = 'price';
+  currentPrice.id = 'current-price';
+  priceBeforeDiscount.id = 'price-before-discount';
+  goodsProduct.id = 'product';
+  goodsCompany.id = 'company';
+  goodsProductDescription.id = 'product-description';
+  goodsGrade.id = 'grade';
+  faStar.classList.add('fa-solid');
+  faStar.classList.add('fa-star');
+  averageRating.id = 'average-rating';
+  numberOfRatings.id = 'number-of-ratings';
+  goodsDelivery.id = 'delivery';
+  deliveryText.id = 'delivery-text';
+  deliveryDate.id = 'delivery-date';
+  basketButtonWrap.id = 'basket-button-wrap';
+  basketButton.id = 'basket-button';
+  cardWrap.append(goodsCard);
+  goodsCard.append(goodsCardImage);
+  goodsCardImage.append(image);
+  goodsCardImage.append(imgQuickiew);
+  goodsCardImage.append(faHeart);
+  goodsCard.append(goodsPrice);
+  goodsPrice.append(currentPrice);
+  goodsPrice.append(priceBeforeDiscount);
+  goodsCard.append(goodsProduct);
+  goodsProduct.append(goodsCompany);
+  goodsProduct.append(goodsProductDescription);
+  goodsCard.append(goodsGrade);
+  goodsGrade.append(faStar);
+  goodsGrade.append(averageRating);
+  goodsGrade.append(numberOfRatings);
+  goodsCard.append(goodsDelivery);
+  goodsDelivery.append(deliveryText);
+  goodsDelivery.append(deliveryDate);
+  goodsCard.append(basketButtonWrap);
+  basketButtonWrap.append(basketButton);
+  var numberOfRatingsValue = generateRatings();
+  currentPrice.innerHTML = "".concat(price, "$");
+  priceBeforeDiscount.innerHTML = "".concat(price2, "$");
+  goodsCompany.innerHTML = "".concat(name);
+  goodsProductDescription.innerHTML = " / ".concat(product);
+  averageRating.innerHTML = "".concat(randomRating);
+  numberOfRatings.innerHTML = "".concat(numberOfRatingsValue, " ratings");
+  imgQuickiew.innerHTML = 'Quick view';
+  basketButton.textContent = 'Add to cart';
+  deliveryText.innerHTML = 'Delivery ';
+  deliveryDate.innerHTML = "".concat(delivery);
+  imgQuickiew.addEventListener('click', cardViewAddClass);
+  function cardViewAddClass() {
+    cardViewWrap.style.display = 'block';
+    backgroundCardiew.classList.add('active-body');
+    createCardView(id, img, name, product, randomRating, numberOfRatingsValue, price, price2);
+  }
+  var obj = {
+    id: id,
+    img: img,
+    product: product,
+    name: name,
+    price: price,
+    price2: price2
+  };
+  basketButton.addEventListener('click', setCardBasket);
+  function setCardBasket() {
+    (0, _basket.createBasketCard)(id, img, product, name, price, price2);
+    thingsInBasket.push(obj);
+    localStorage.setItem('basket', JSON.stringify(thingsInBasket));
+  }
+}
+function createCardView(id, img, name, product, avergeRating, ratings, price, price2) {
+  var goodsCardView = document.createElement('div');
+  var goodsCardViewLeft = document.createElement('div');
+  var goodsCardViewLeftImg = document.createElement('img');
+  var viewLeftButtonWrap = document.createElement('div');
+  var photoNumber = document.createElement('span');
+  var videoBtn = document.createElement('span');
+  var similarBtn = document.createElement('span');
+  var goodsCardViewRight = document.createElement('div');
+  var goodsCardViewRightTop = document.createElement('div');
+  var exitViewCard = document.createElement('button');
+  var faXmark = document.createElement('i');
+  var productView = document.createElement('div');
+  var productViewSpanName = document.createElement('span');
+  var productViewSpanProduct = document.createElement('span');
+  var gradeView = document.createElement('div');
+  var rating = document.createElement('div');
+  var faStar = document.createElement('i');
+  var averageRating = document.createElement('span');
+  var numberOfRatings = document.createElement('span');
+  var textOfRatings = document.createElement('span');
+  var articleWrap = document.createElement('div');
+  var article = document.createElement('span');
+  var articleNumber = document.createElement('span');
+  var faCopy = document.createElement('i');
+  var priceView = document.createElement('div');
+  var currentPrice = document.createElement('span');
+  var priceBeforeDiscount = document.createElement('span');
+  var basketButtonViewWrap = document.createElement('div');
+  var basketButton = document.createElement('button');
+  var faHeart = document.createElement('i');
+  var goodsCardViewRightBottom = document.createElement('div');
+  var moreInfoView = document.createElement('div');
+  var moreInfo = document.createElement('span');
+  var faPlay = document.createElement('i');
+  var faGlass = document.createElement('i');
+  faPlay.classList.add('fa-solid');
+  faPlay.classList.add('fa-play');
+  faGlass.classList.add('fa-solid');
+  faGlass.classList.add('fa-magnifying-glass');
+  goodsCardView.classList.add('goods-card-view');
+  goodsCardView.id = id;
+  goodsCardViewLeft.id = 'goods-card-view-left';
+  goodsCardViewLeftImg.setAttribute('src', img);
+  viewLeftButtonWrap.id = 'view-left-button-wrap';
+  photoNumber.id = 'photo-number';
+  videoBtn.id = 'video-btn';
+  similarBtn.id = 'similar-btn';
+  goodsCardViewRight.id = 'goods-card-view-right';
+  goodsCardViewRightTop.id = 'goods-card-view-right-top';
+  exitViewCard.id = 'exit-view-card';
+  faXmark.classList.add('fa-solid');
+  faXmark.classList.add('fa-xmark');
+  productView.id = 'product-view';
+  gradeView.id = 'grade-view';
+  rating.id = 'rating';
+  faStar.classList.add('fa-solid');
+  faStar.classList.add('fa-star');
+  averageRating.id = 'average-rating';
+  numberOfRatings.id = 'number-of-ratings';
+  textOfRatings.id = 'text-of-ratings';
+  articleWrap.id = 'article-wrap';
+  article.id = 'article';
+  articleNumber.id = 'article-number';
+  faCopy.classList.add('fa-regular');
+  faCopy.classList.add('fa-copy');
+  priceView.id = 'price-view';
+  currentPrice.id = 'current-price';
+  priceBeforeDiscount.id = 'price-before-discount';
+  basketButtonViewWrap.id = 'basket-button-view-wrap';
+  basketButton.id = 'basket-button';
+  faHeart.classList.add('fa-regular');
+  faHeart.classList.add('fa-heart');
+  goodsCardViewRightBottom.id = 'goods-card-view-right-bottom';
+  moreInfoView.id = 'more-info-view';
+  moreInfo.id = 'more-info';
+  cardViewWrap.append(goodsCardView);
+  goodsCardView.append(goodsCardViewLeft);
+  goodsCardViewLeft.append(goodsCardViewLeftImg);
+  goodsCardViewLeft.append(viewLeftButtonWrap);
+  viewLeftButtonWrap.append(photoNumber);
+  viewLeftButtonWrap.append(videoBtn);
+  videoBtn.appendChild(faPlay);
+  viewLeftButtonWrap.append(similarBtn);
+  similarBtn.appendChild(faGlass);
+  goodsCardView.append(goodsCardViewRight);
+  goodsCardViewRight.append(goodsCardViewRightTop);
+  goodsCardViewRightTop.append(exitViewCard);
+  exitViewCard.append(faXmark);
+  goodsCardViewRightTop.append(productView);
+  productView.append(productViewSpanName);
+  productView.append(productViewSpanProduct);
+  goodsCardViewRightTop.append(gradeView);
+  gradeView.append(rating);
+  rating.append(faStar);
+  rating.append(averageRating);
+  gradeView.append(numberOfRatings);
+  gradeView.append(textOfRatings);
+  gradeView.append(articleWrap);
+  articleWrap.append(article);
+  articleWrap.append(articleNumber);
+  articleWrap.append(faCopy);
+  goodsCardViewRightTop.append(priceView);
+  priceView.append(currentPrice);
+  priceView.append(priceBeforeDiscount);
+  goodsCardViewRightTop.append(basketButtonViewWrap);
+  basketButtonViewWrap.append(basketButton);
+  basketButtonViewWrap.append(faHeart);
+  goodsCardViewRight.append(goodsCardViewRightBottom);
+  goodsCardViewRightBottom.append(moreInfoView);
+  moreInfoView.append(moreInfo);
+  photoNumber.innerHTML = "1/16";
+  videoBtn.innerHTML = "Video";
+  similarBtn.innerHTML = "Similar";
+  productViewSpanName.innerHTML = "".concat(name, " / ");
+  productViewSpanProduct.innerHTML = "".concat(product);
+  averageRating.innerHTML = "".concat(avergeRating);
+  numberOfRatings.innerHTML = "".concat(ratings);
+  textOfRatings.innerHTML = "ratings";
+  article.innerHTML = "Article:";
+  articleNumber.innerHTML = "".concat(generateId());
+  currentPrice.innerHTML = "".concat(price, "$");
+  priceBeforeDiscount.innerHTML = "".concat(price2, "$");
+  basketButton.innerHTML = "Add to cart";
+  moreInfo.innerHTML = "More information about the product";
+  faXmark.addEventListener('click', cardViewRemoveClass);
+  function cardViewRemoveClass() {
+    cardViewWrap.style.display = '';
+    backgroundCardiew.classList.remove('active-body');
+  }
+  basketButton.addEventListener('click', setCardBasket);
+  basketButton.addEventListener('click', cardViewRemoveClass);
+  var obj = {
+    id: id,
+    img: img,
+    product: product,
+    name: name,
+    price: price,
+    price2: price2
+  };
+  function setCardBasket() {
+    (0, _basket.createBasketCard)(id, img, product, name, price, price2);
+    thingsInBasket.push(obj);
+    localStorage.setItem('basket', JSON.stringify(thingsInBasket));
+  }
+}
+},{"./basket.js":"js/basket.js","./index.js":"js/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -159,7 +588,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59728" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56993" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

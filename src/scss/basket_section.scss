@@ -3,7 +3,7 @@
     border-radius: 30px;
     position: relative;
     background-color: rgba(128, 128, 128, 0.066);
-    height: 100vh;
+    min-height: 100vh;
     z-index: 1;
     display: none;
 
@@ -61,20 +61,23 @@
 
             #basket-left-cards-wrap {
 
-                #basket-left-card {
+                .basket-left-card {
                     display: flex;
                     justify-content: space-between  ;
                     margin-top: 35px;
                     position: relative;
+                    height: 200px;
 
                     #basket-left-card-img {
                         width: 22%;
                         margin: 0px 10px;
+                        height: 100%;
 
                         & img {
                             width: 100%;
                             border-radius: 20px;
                             cursor: pointer;
+                            height: 100%;
                         }
                     }
 
@@ -89,7 +92,7 @@
                     }
 
                     #basket-left-card-counter {
-                        margin: 10px 0px;
+                        margin: 10px 15px;
 
                         #basket-counter-minus,
                         #basket-counter-plus {
@@ -194,6 +197,12 @@
                     display: flex;
                     flex-direction: column;
                     align-items: end;
+                }
+
+                #goods-quantity {
+                    font-size: 24px;
+                    color: black;
+                    font-weight: 400;
                 }
             }
 
