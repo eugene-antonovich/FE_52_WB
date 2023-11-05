@@ -19,13 +19,9 @@
                     <div id="header-search">
                         <form> 
                             <i id="glass" class="fa-solid fa-magnifying-glass"></i>
-                            <input class="search" id="search" type="text" name="text" placeholder="I'm looking for...">
+                            <input class="search" id="search" type="text" name="text" placeholder="I'm looking for..." autocomplete="off">
                             <ul id="dropdown" class="show">
-                                <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i>Lorem, ipsum dolor.</a></li>
-                                <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i>Lorem, ipsum dolor.</a></li>
-                                <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i>Lorem, ipsum dolor.</a></li>
-                                <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i>Lorem, ipsum dolor.</a></li>
-                                <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i>Lorem, ipsum dolor.</a></li>
+                                <!-- <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i>Lorem, ipsum dolor.</a></li> -->
                             </ul>
                             <i id="camera" class="fa-solid fa-camera"></i>
                             <span id="search-photo">Search by photo</span>
@@ -117,6 +113,10 @@
                     <div id="goods-card-view-wrap">
                     </div>
 
+                    <div id="notification">
+                        <i class="fa-regular fa-circle-check"></i>
+                        <span>Item added to cart</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -126,6 +126,7 @@
                 <div id="basket-section-wrap">
                     <div id="basket-left-wrap">
                         <h3 id="basket-left-wrap-title">Basket</h3>
+                        <button id="del-all-btn">Delete all</button>
 
                         <div id="basket-left-chevron">
                             <button id="chevron-up">
@@ -167,6 +168,7 @@
     <script type="module" src="/basket.4a0189c5.js"></script>
     <script type="module" src="/goods.9e1c01d8.js"></script>
     <script type="module" src="/header.4485232e.js"></script>
+    <script type="module" src="/search.a3177960.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 </html>

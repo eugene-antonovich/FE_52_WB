@@ -3,6 +3,28 @@
     top: 140px;
     display: flex;
     flex-wrap: wrap;
+
+    #notification {
+        height: 20px;
+        width: 20%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 20px;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.701);
+        color: white;
+        font-size: 22px;
+        position: fixed;
+        top: -200%;
+        left: 50%;
+        transform: translate(-50%);
+        z-index: 4;
+
+        .fa-circle-check {
+            font-size: 30px;
+        }
+    }
 }
 
     .goods-card {
@@ -32,6 +54,7 @@
                 background-position: center;
                 background-size: cover;
             }            
+            
         }   
 
         #price {
@@ -169,7 +192,6 @@
                 }
     
                 .img-quick-view {
-                    display: block;
                     position: absolute;
                     top: 81%;
                     right: 50%;

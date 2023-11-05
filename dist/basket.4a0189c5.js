@@ -136,10 +136,20 @@ var basketLeftCardsWrap = document.getElementById('basket-left-cards-wrap');
 var headerBasketSum = document.getElementById('header-basket-sum');
 var goodsQuantity = document.getElementById('goods-quantity');
 var basketPriceGoods = document.getElementById('basket-price-goods');
+var basketDelAllBtn = document.getElementById('del-all-btn');
 var basketPriceSumTop = document.createElement('div');
-basketPriceSumTop.classList.add('goods-price-sum-top');
 var basketPriceSumBottom = document.createElement('div');
 basketPriceSumBottom.classList.add('goods-price-sum-bottom');
+basketPriceSumTop.classList.add('goods-price-sum-top');
+function basketDellAll() {
+  localStorage.removeItem('basket');
+  basketPriceSumTop.innerHTML = '0$';
+  basketPriceSumBottom.innerHTML = '0$';
+  basketLeftCardsWrap.innerHTML = '';
+  goodsQuantity.innerHTML = '0';
+  headerBasketSum.innerHTML = '0';
+}
+basketDelAllBtn.addEventListener('click', basketDellAll);
 headerBasketSum.innerHTML = basketLeftCardsWrap.children.length;
 var ar = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : [];
 var basketSumTop = 0;
@@ -297,7 +307,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56993" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64423" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -1,12 +1,17 @@
-import {createBasketCard, basketSumNotEmpty} from "./basket.js";
-import {localStoragePromise, localStorageBasket} from "./index.js"
+import {localStoragePromise, generateId, generateRatings, getRandomRating} from "./index.js"
+import {createBasketCard} from "./basket.js";
 
 const cardWrap = document.getElementById('goods-cards-wrap');
-const card = document.getElementById('goods-card');
-const quickViewCard = document.getElementById('img-quick-view');
 const cardViewWrap = document.getElementById('goods-card-view-wrap');
-const exitCardViewWrap = document.getElementById('exit-view-card');
 const backgroundCardiew = document.getElementById('background-card-view');
+const notification = document.getElementById('notification');
+
+function notificationNotActive() {
+  notification.style.top = '20%';
+  setTimeout(function() {
+    notification.style.top = '-200%'
+  }, 1000)
+}
 
 let urlMockApi = 'https://6540cac845bedb25bfc29fb1.mockapi.io/cards' 
 
@@ -14,31 +19,13 @@ fetch(urlMockApi)
     .then(response => response.json())
     .then(promiseWrap => localStorage.setItem('promise', JSON.stringify(promiseWrap)));
 
-    function generateId() {
-        let randomValue = Math.floor(Math.random() * 10000 * 10000);
-        return randomValue
-    }
-
-    function generateRatings() {
-      let randomValue = Math.floor(Math.random() * 1000);
-      return randomValue
-  }
-
-    function getRandomRating(min, max, decimals) {
-      var factor = Math.pow(10, decimals);
-      var randomValue =  Math.random() * (max - min) + min;
-      return Math.round(randomValue * factor) / factor;
-    }
-
-
 let thingsInBasket = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : [];
 
 let promiseWrap;
 
-
 for(let i = 0; i < localStoragePromise.length; i++) {
   localStoragePromise[i].id =  generateId();
-
+  
   createCard(
   localStoragePromise[i].img,
   localStoragePromise[i].price,
@@ -49,10 +36,9 @@ for(let i = 0; i < localStoragePromise.length; i++) {
   localStoragePromise[i].id)
 }
 
-
 for (let i = 0; i < thingsInBasket.length; i++) {
 
-  createBasketCard(
+createBasketCard(
   thingsInBasket[i].id,
   thingsInBasket[i].img, 
   thingsInBasket[i].product,
@@ -60,8 +46,7 @@ for (let i = 0; i < thingsInBasket.length; i++) {
   thingsInBasket[i].price,
   thingsInBasket[i].price2,)
 }
-
-
+  
 function createCard(img, price, price2, name, product, delivery, id) {
         const goodsCard = document.createElement('div');
         const goodsCardImage = document.createElement('div');
@@ -162,6 +147,8 @@ function createCard(img, price, price2, name, product, delivery, id) {
         }
 
         basketButton.addEventListener('click', setCardBasket)
+        basketButton.addEventListener('click', notificationNotActive);
+
 
         function setCardBasket() {
           createBasketCard(id, img, product, name, price, price2)
@@ -315,6 +302,7 @@ function createCardView(id ,img, name, product, avergeRating, ratings, price, pr
 
   basketButton.addEventListener('click',setCardBasket);
   basketButton.addEventListener('click',cardViewRemoveClass);
+  basketButton.addEventListener('click', notificationNotActive)
 
   let obj = {
     id : id,
@@ -331,3 +319,4 @@ function createCardView(id ,img, name, product, avergeRating, ratings, price, pr
     localStorage.setItem('basket', JSON.stringify(thingsInBasket))
   }
 }
+

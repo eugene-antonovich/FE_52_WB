@@ -26,6 +26,30 @@
                 margin: 0px 10px    ;
             }
 
+            #del-all-btn {
+                padding: 5px 10px;
+                border: none;
+                background-color: rgba(128, 128, 128, 0.102);
+                font-size: 18px;
+                cursor: pointer;
+                border-radius: 10px;
+                font-weight: 700;
+                position: absolute;
+                right: 90px;
+                top: 62px  ;
+
+                &:hover {
+                    background-color: rgba(88, 88, 88, 0.533);
+                    color: white;
+                }
+
+                &:active {
+                background-color: rgba(128, 128, 128, 0.102);
+                    color: black;
+                    font-size: 17px;
+                }
+            }
+
             #basket-left-chevron {
                 position: absolute;
                 right: 5%;

@@ -123,9 +123,31 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.localStoragePromise = exports.localStorageBasket = void 0;
+exports.generateId = generateId;
+exports.generateRatings = generateRatings;
+exports.getRandomRating = getRandomRating;
+exports.localStoragePromise = void 0;
+exports.promise = promise;
 var localStoragePromise = exports.localStoragePromise = JSON.parse(localStorage.getItem('promise'));
-var localStorageBasket = exports.localStorageBasket = JSON.parse(localStorage.getItem('basket-sum'));
+function generateId() {
+  var randomValue = Math.floor(Math.random() * 10000 * 10000);
+  return randomValue;
+}
+function generateRatings() {
+  var randomValue = Math.floor(Math.random() * 1000);
+  return randomValue;
+}
+function getRandomRating(min, max, decimals) {
+  var factor = Math.pow(10, decimals);
+  var randomValue = Math.random() * (max - min) + min;
+  return Math.round(randomValue * factor) / factor;
+}
+function promise(item) {
+  for (var i = 0; i < item.length; i++) {
+    item[i].id = generateId();
+    createCard(item[i].img, item[i].price, item[i].price2, item[i].name, item[i].product, item[i].delivery, item[i].id);
+  }
+}
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -151,7 +173,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56993" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64423" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

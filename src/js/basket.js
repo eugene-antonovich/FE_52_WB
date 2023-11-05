@@ -10,12 +10,24 @@ const basketLeftCardsWrap = document.getElementById('basket-left-cards-wrap');
 const headerBasketSum = document.getElementById('header-basket-sum');
 const goodsQuantity = document.getElementById('goods-quantity')
 const basketPriceGoods = document.getElementById('basket-price-goods');
+const basketDelAllBtn = document.getElementById('del-all-btn');
+
 const basketPriceSumTop = document.createElement('div');
+const basketPriceSumBottom = document.createElement('div');
+
+basketPriceSumBottom.classList.add('goods-price-sum-bottom');
 basketPriceSumTop.classList.add('goods-price-sum-top');
 
-const basketPriceSumBottom = document.createElement('div');
-basketPriceSumBottom.classList.add('goods-price-sum-bottom');
+function basketDellAll() {
+  localStorage.removeItem('basket');
+  basketPriceSumTop.innerHTML = '0$';
+  basketPriceSumBottom.innerHTML = '0$';
+  basketLeftCardsWrap.innerHTML = '';
+  goodsQuantity.innerHTML = '0';
+  headerBasketSum.innerHTML = '0';
+}
 
+basketDelAllBtn.addEventListener('click', basketDellAll);
 
 headerBasketSum.innerHTML = basketLeftCardsWrap.children.length;
 

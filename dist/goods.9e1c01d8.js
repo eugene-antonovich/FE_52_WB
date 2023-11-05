@@ -117,7 +117,38 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/basket.js":[function(require,module,exports) {
+})({"js/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.generateId = generateId;
+exports.generateRatings = generateRatings;
+exports.getRandomRating = getRandomRating;
+exports.localStoragePromise = void 0;
+exports.promise = promise;
+var localStoragePromise = exports.localStoragePromise = JSON.parse(localStorage.getItem('promise'));
+function generateId() {
+  var randomValue = Math.floor(Math.random() * 10000 * 10000);
+  return randomValue;
+}
+function generateRatings() {
+  var randomValue = Math.floor(Math.random() * 1000);
+  return randomValue;
+}
+function getRandomRating(min, max, decimals) {
+  var factor = Math.pow(10, decimals);
+  var randomValue = Math.random() * (max - min) + min;
+  return Math.round(randomValue * factor) / factor;
+}
+function promise(item) {
+  for (var i = 0; i < item.length; i++) {
+    item[i].id = generateId();
+    createCard(item[i].img, item[i].price, item[i].price2, item[i].name, item[i].product, item[i].delivery, item[i].id);
+  }
+}
+},{}],"js/basket.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -136,10 +167,20 @@ var basketLeftCardsWrap = document.getElementById('basket-left-cards-wrap');
 var headerBasketSum = document.getElementById('header-basket-sum');
 var goodsQuantity = document.getElementById('goods-quantity');
 var basketPriceGoods = document.getElementById('basket-price-goods');
+var basketDelAllBtn = document.getElementById('del-all-btn');
 var basketPriceSumTop = document.createElement('div');
-basketPriceSumTop.classList.add('goods-price-sum-top');
 var basketPriceSumBottom = document.createElement('div');
 basketPriceSumBottom.classList.add('goods-price-sum-bottom');
+basketPriceSumTop.classList.add('goods-price-sum-top');
+function basketDellAll() {
+  localStorage.removeItem('basket');
+  basketPriceSumTop.innerHTML = '0$';
+  basketPriceSumBottom.innerHTML = '0$';
+  basketLeftCardsWrap.innerHTML = '';
+  goodsQuantity.innerHTML = '0';
+  headerBasketSum.innerHTML = '0';
+}
+basketDelAllBtn.addEventListener('click', basketDellAll);
 headerBasketSum.innerHTML = basketLeftCardsWrap.children.length;
 var ar = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : [];
 var basketSumTop = 0;
@@ -272,49 +313,31 @@ function createBasketCard(id, img, product, name, price, price2) {
   }
   priceBasket(sum1(), sum2());
 }
-},{}],"js/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.localStoragePromise = exports.localStorageBasket = void 0;
-var localStoragePromise = exports.localStoragePromise = JSON.parse(localStorage.getItem('promise'));
-var localStorageBasket = exports.localStorageBasket = JSON.parse(localStorage.getItem('basket-sum'));
 },{}],"js/goods.js":[function(require,module,exports) {
 "use strict";
 
-var _basket = require("./basket.js");
 var _index = require("./index.js");
+var _basket = require("./basket.js");
 var cardWrap = document.getElementById('goods-cards-wrap');
-var card = document.getElementById('goods-card');
-var quickViewCard = document.getElementById('img-quick-view');
 var cardViewWrap = document.getElementById('goods-card-view-wrap');
-var exitCardViewWrap = document.getElementById('exit-view-card');
 var backgroundCardiew = document.getElementById('background-card-view');
+var notification = document.getElementById('notification');
+function notificationNotActive() {
+  notification.style.top = '20%';
+  setTimeout(function () {
+    notification.style.top = '-200%';
+  }, 1000);
+}
 var urlMockApi = 'https://6540cac845bedb25bfc29fb1.mockapi.io/cards';
 fetch(urlMockApi).then(function (response) {
   return response.json();
 }).then(function (promiseWrap) {
   return localStorage.setItem('promise', JSON.stringify(promiseWrap));
 });
-function generateId() {
-  var randomValue = Math.floor(Math.random() * 10000 * 10000);
-  return randomValue;
-}
-function generateRatings() {
-  var randomValue = Math.floor(Math.random() * 1000);
-  return randomValue;
-}
-function getRandomRating(min, max, decimals) {
-  var factor = Math.pow(10, decimals);
-  var randomValue = Math.random() * (max - min) + min;
-  return Math.round(randomValue * factor) / factor;
-}
 var thingsInBasket = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : [];
 var promiseWrap;
 for (var i = 0; i < _index.localStoragePromise.length; i++) {
-  _index.localStoragePromise[i].id = generateId();
+  _index.localStoragePromise[i].id = (0, _index.generateId)();
   createCard(_index.localStoragePromise[i].img, _index.localStoragePromise[i].price, _index.localStoragePromise[i].price2, _index.localStoragePromise[i].name, _index.localStoragePromise[i].product, _index.localStoragePromise[i].delivery, _index.localStoragePromise[i].id);
 }
 for (var _i = 0; _i < thingsInBasket.length; _i++) {
@@ -341,7 +364,7 @@ function createCard(img, price, price2, name, product, delivery, id) {
   var deliveryDate = document.createElement('span');
   var basketButtonWrap = document.createElement('div');
   var basketButton = document.createElement('button');
-  var randomRating = getRandomRating(3.0, 5.0, 1);
+  var randomRating = (0, _index.getRandomRating)(3.0, 5.0, 1);
   goodsCard.id = id;
   goodsCard.classList.add('goods-card');
   goodsCardImage.id = 'goods-card-img';
@@ -385,7 +408,7 @@ function createCard(img, price, price2, name, product, delivery, id) {
   goodsDelivery.append(deliveryDate);
   goodsCard.append(basketButtonWrap);
   basketButtonWrap.append(basketButton);
-  var numberOfRatingsValue = generateRatings();
+  var numberOfRatingsValue = (0, _index.generateRatings)();
   currentPrice.innerHTML = "".concat(price, "$");
   priceBeforeDiscount.innerHTML = "".concat(price2, "$");
   goodsCompany.innerHTML = "".concat(name);
@@ -411,6 +434,7 @@ function createCard(img, price, price2, name, product, delivery, id) {
     price2: price2
   };
   basketButton.addEventListener('click', setCardBasket);
+  basketButton.addEventListener('click', notificationNotActive);
   function setCardBasket() {
     (0, _basket.createBasketCard)(id, img, product, name, price, price2);
     thingsInBasket.push(obj);
@@ -537,7 +561,7 @@ function createCardView(id, img, name, product, avergeRating, ratings, price, pr
   numberOfRatings.innerHTML = "".concat(ratings);
   textOfRatings.innerHTML = "ratings";
   article.innerHTML = "Article:";
-  articleNumber.innerHTML = "".concat(generateId());
+  articleNumber.innerHTML = "".concat((0, _index.generateId)());
   currentPrice.innerHTML = "".concat(price, "$");
   priceBeforeDiscount.innerHTML = "".concat(price2, "$");
   basketButton.innerHTML = "Add to cart";
@@ -549,6 +573,7 @@ function createCardView(id, img, name, product, avergeRating, ratings, price, pr
   }
   basketButton.addEventListener('click', setCardBasket);
   basketButton.addEventListener('click', cardViewRemoveClass);
+  basketButton.addEventListener('click', notificationNotActive);
   var obj = {
     id: id,
     img: img,
@@ -563,7 +588,7 @@ function createCardView(id, img, name, product, avergeRating, ratings, price, pr
     localStorage.setItem('basket', JSON.stringify(thingsInBasket));
   }
 }
-},{"./basket.js":"js/basket.js","./index.js":"js/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./index.js":"js/index.js","./basket.js":"js/basket.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -588,7 +613,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56993" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64423" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
